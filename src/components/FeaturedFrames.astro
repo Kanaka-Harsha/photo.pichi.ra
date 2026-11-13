@@ -1,0 +1,129 @@
+---
+import { getFeaturedPhotographs } from '../data/photographs';
+import PhotographCard from './PhotographCard.astro';
+
+const featuredPhotos = getFeaturedPhotographs().slice(0, 6);
+---
+
+<section class="featured-section" aria-labelledby="featured-heading">
+  <div class="container">
+    <div class="featured-header">
+      <div class="header-text">
+        <span class="section-tag">Curated Selection</span>
+        <h2 id="featured-heading" class="section-title">Frames from the wild</h2>
+        <p class="section-sub">A collection of moments, encounters, and landscapes.</p>
+      </div>
+      <div class="header-action">
+        <a href="/gallery/" class="btn-subtle-link">
+          <span>Explore complete gallery</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Asymmetrical Editorial Grid -->
+    <div class="editorial-grid">
+      {featuredPhotos.map((photo, index) => (
+        <div class={`grid-slot slot-${index + 1}`}>
+          <PhotographCard photo={photo} priority={index === 0} editorialLayout={true} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-section {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
+    background-color: var(--bg-primary);
+  }
+
+  .featured-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .featured-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-olive);
+    margin-bottom: 0.35rem;
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+  }
+
+  /* Editorial Grid Layout */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 640px) {
+    .editorial-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .editorial-grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-xl);
+    }
+
+    /* Asymmetric editorial rhythm */
+    .slot-1 {
+      grid-column: span 7; /* Big feature */
+    }
+
+    .slot-2 {
+      grid-column: span 5; /* Tall portrait counterpart */
+    }
+
+    .slot-3 {
+      grid-column: span 4;
+    }
+
+    .slot-4 {
+      grid-column: span 4;
+    }
+
+    .slot-5 {
+      grid-column: span 4;
+    }
+
+    .slot-6 {
+      grid-column: span 12;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+</style>
+

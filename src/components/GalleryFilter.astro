@@ -1,0 +1,154 @@
+---
+interface Props {
+  activeCategory?: string;
+}
+
+const { activeCategory = 'all' } = Astro.props;
+
+const categories = [
+  { slug: 'all', label: 'All Photographs' },
+  { slug: 'wildlife', label: 'Wildlife' },
+  { slug: 'birds', label: 'Birds' },
+  { slug: 'nature', label: 'Nature' },
+  { slug: 'landscapes', label: 'Landscapes' }
+];
+---
+
+<div class="gallery-filter-bar" role="toolbar" aria-label="Filter gallery by category">
+  <div class="filter-track">
+    {categories.map((cat) => {
+      const isSelected = cat.slug === activeCategory;
+      return (
+        <button
+          type="button"
+          class={`filter-btn ${isSelected ? 'is-active' : ''}`}
+          data-filter-target={cat.slug}
+          aria-pressed={isSelected ? 'true' : 'false'}
+        >
+          <span class="btn-indicator" aria-hidden="true"></span>
+          <span>{cat.label}</span>
+        </button>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .gallery-filter-bar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-xs) 0;
+  }
+
+  .filter-track {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    background-color: var(--bg-secondary);
+    padding: 0.35rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.15rem;
+    background: transparent;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+
+  .filter-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .btn-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color var(--transition-fast);
+  }
+
+  .filter-btn.is-active {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  .filter-btn.is-active .btn-indicator {
+    background-color: var(--accent-olive);
+  }
+</style>
+
+<script>
+  function setupGalleryFilters() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter-target]');
+    const cards = document.querySelectorAll<HTMLElement>('.gallery-grid-item');
+    const emptyState = document.getElementById('gallery-empty-state');
+
+    if (!buttons.length || !cards.length) return;
+
+    function applyFilter(category: string) {
+      // Update button states
+      buttons.forEach(btn => {
+        const isMatch = btn.dataset.filterTarget === category;
+        btn.classList.toggle('is-active', isMatch);
+        btn.setAttribute('aria-pressed', String(isMatch));
+      });
+
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const itemCategory = card.dataset.category;
+        const trigger = card.querySelector<HTMLElement>('[data-lightbox-src]');
+
+        if (category === 'all' || itemCategory === category) {
+          card.style.display = '';
+          card.removeAttribute('aria-hidden');
+          if (trigger) trigger.removeAttribute('data-lightbox-hidden');
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+          card.setAttribute('aria-hidden', 'true');
+          if (trigger) trigger.setAttribute('data-lightbox-hidden', 'true');
+        }
+      });
+
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.filterTarget || 'all';
+        applyFilter(target);
+      });
+    });
+
+    // Check URL query param or hash on initial load
+    const params = new URLSearchParams(window.location.search);
+    const initialCategory = params.get('category');
+    if (initialCategory) {
+      applyFilter(initialCategory);
+    }
+  }
+
+  setupGalleryFilters();
+  document.addEventListener('astro:after-swap', setupGalleryFilters);
+</script>
+

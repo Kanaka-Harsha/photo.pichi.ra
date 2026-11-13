@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://photo-pichi-ra.vercel.app/sitemap.xml

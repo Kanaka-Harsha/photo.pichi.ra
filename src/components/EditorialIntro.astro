@@ -1,0 +1,103 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<section class="editorial-intro-section" aria-labelledby="intro-heading">
+  <div class="container-editorial">
+    <div class="intro-inner">
+      <div class="intro-eyebrow">
+        <span class="intro-tag">Personal Journal</span>
+        <span class="intro-divider">/</span>
+        <span class="intro-date">Est. 2026</span>
+      </div>
+
+      <h2 id="intro-heading" class="intro-statement">
+        {siteConfig.taglines.editorialIntro}
+      </h2>
+
+      <div class="intro-body">
+        <p class="intro-paragraph">
+          Photography has become my way of slowing down, observing, and discovering the outdoors. Every frame is a step in learning, exploring, and seeing the world with fresh eyes.
+        </p>
+        <p class="intro-sub-paragraph">
+          Renting gear for weekend field walks, learning the interplay of natural light in Lightroom, and spending quiet hours waiting for wildlife to emerge — this is a personal journey of patience, creativity, and deep appreciation for nature.
+        </p>
+      </div>
+
+      <div class="intro-link-wrap">
+        <a href="/about/" class="btn-subtle-link">
+          <span>Read the photographer's story</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .editorial-intro-section {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-3xl);
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .intro-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .intro-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-forest);
+    font-weight: 500;
+  }
+
+  .intro-divider {
+    color: var(--border-subtle);
+  }
+
+  .intro-statement {
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    line-height: 1.22;
+    color: var(--text-primary);
+    max-width: 820px;
+  }
+
+  .intro-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    max-width: 760px;
+  }
+
+  @media (min-width: 768px) {
+    .intro-body {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  .intro-paragraph {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+
+  .intro-sub-paragraph {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .intro-link-wrap {
+    padding-top: var(--space-sm);
+  }
+</style>
+

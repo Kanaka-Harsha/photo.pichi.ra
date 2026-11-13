@@ -1,0 +1,161 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import GalleryFilter from '../../components/GalleryFilter.astro';
+import PhotographCard from '../../components/PhotographCard.astro';
+import { getPhotographsByCategory } from '../../data/photographs';
+import { siteConfig } from '../../data/site';
+import type { Category } from '../../types/photograph';
+
+export async function getStaticPaths() {
+  const categories: Array<{ slug: 'wildlife' | 'birds' | 'nature' | 'landscapes'; name: string; description: string }> = [
+    {
+      slug: 'wildlife',
+      name: 'Wildlife Photography',
+      description: 'Documenting creatures in their natural habitats, capturing expressions, movement, and unseen moments of animal life.'
+    },
+    {
+      slug: 'birds',
+      name: 'Bird Photography',
+      description: 'Patience rewarded: perched silhouettes, vibrant plumage, and fleeting moments in the canopy and shorelines.'
+    },
+    {
+      slug: 'nature',
+      name: 'Nature & Textures',
+      description: 'The organic patterns, intricate forest floors, droplets, and quiet natural details that surround us.'
+    },
+    {
+      slug: 'landscapes',
+      name: 'Landscape Photography',
+      description: 'Open skies, rolling hills, calm horizons, and the changing temperaments of natural light across seasons.'
+    }
+  ];
+
+  return categories.map((cat) => ({
+    params: { category: cat.slug },
+    props: { categoryInfo: cat }
+  }));
+}
+
+const { category } = Astro.params;
+const { categoryInfo } = Astro.props;
+
+const categoryPhotos = getPhotographsByCategory(category as Category);
+---
+
+<MainLayout
+  title={`${categoryInfo.name} | ${siteConfig.brandName}`}
+  description={categoryInfo.description}
+>
+  <div class="category-page">
+    <div class="container">
+      <!-- Category Header -->
+      <header class="category-header">
+        <a href="/gallery/" class="back-link">
+          <span aria-hidden="true">&larr;</span>
+          <span>Back to All Collections</span>
+        </a>
+        <h1 class="cat-page-title">{categoryInfo.name}</h1>
+        <p class="cat-page-lead">{categoryInfo.description}</p>
+      </header>
+
+      <!-- Category Filter Bar -->
+      <GalleryFilter activeCategory={category} />
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" id="gallery-grid">
+        {categoryPhotos.map((photo, index) => (
+          <div class="gallery-grid-item" data-category={photo.category}>
+            <PhotographCard photo={photo} priority={index < 4} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      {categoryPhotos.length === 0 && (
+        <div class="empty-state">
+          <h3>No photographs yet in this collection</h3>
+          <p>New frames are currently in development.</p>
+          <a href="/gallery/" class="btn btn-primary" style="margin-top: 1rem;">View all photographs</a>
+        </div>
+      )}
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .category-page {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-4xl);
+    background-color: var(--bg-primary);
+  }
+
+  .category-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto var(--space-2xl) auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-olive);
+    margin-bottom: var(--space-sm);
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--accent-forest);
+  }
+
+  .cat-page-title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .cat-page-lead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-top: var(--space-sm);
+    line-height: 1.65;
+  }
+
+  /* Grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 600px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: var(--space-4xl) 0;
+    color: var(--text-muted);
+  }
+
+  .empty-state h3 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--text-primary);
+  }
+</style>
+

@@ -1,0 +1,31 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import EditorialIntro from '../components/EditorialIntro.astro';
+import FeaturedFrames from '../components/FeaturedFrames.astro';
+import CategoryCards from '../components/CategoryCards.astro';
+import BehindTheLens from '../components/BehindTheLens.astro';
+import InstagramInvite from '../components/InstagramInvite.astro';
+import { siteConfig } from '../data/site';
+---
+
+<MainLayout title={siteConfig.title} description={siteConfig.description}>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Editorial Statement Section -->
+  <EditorialIntro />
+
+  <!-- Featured Photography Showcase -->
+  <FeaturedFrames />
+
+  <!-- Thematic Category Portals -->
+  <CategoryCards />
+
+  <!-- Behind the Lens / Personal Story Preview -->
+  <BehindTheLens />
+
+  <!-- Instagram Community & Follow -->
+  <InstagramInvite />
+</MainLayout>
+

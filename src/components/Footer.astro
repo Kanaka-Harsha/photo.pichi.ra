@@ -1,0 +1,233 @@
+---
+import { siteConfig } from '../data/site';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">{siteConfig.brandName}</a>
+        <p class="footer-desc">
+          Exploring, observing, and documenting the natural world — one frame at a time.
+        </p>
+        <div class="footer-badge">
+          <span class="badge-dot"></span>
+          <span>Nature, Wildlife &amp; Birds</span>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <span class="col-title">Navigation</span>
+          <ul class="footer-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/gallery/">Full Gallery</a></li>
+            <li><a href="/about/">About &amp; Story</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <span class="col-title">Collections</span>
+          <ul class="footer-nav">
+            <li><a href="/gallery/wildlife">Wildlife</a></li>
+            <li><a href="/gallery/birds">Birds</a></li>
+            <li><a href="/gallery/nature">Nature</a></li>
+            <li><a href="/gallery/landscapes">Landscapes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <span class="col-title">Connect</span>
+          <ul class="footer-nav">
+            <li>
+              <a
+                href={siteConfig.instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="instagram-link"
+              >
+                <span>Instagram</span>
+                <span class="insta-handle">{siteConfig.instagram.handle}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; {currentYear} {siteConfig.brandName}. All photographs and rights reserved.
+      </p>
+      <div class="footer-extra">
+        <a href="#main-content" class="back-to-top">
+          <span>Back to top</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+    margin-top: auto;
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-2xl);
+    color: var(--text-primary);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  @media (min-width: 900px) {
+    .footer-top {
+      grid-template-columns: 1.3fr 2fr;
+      align-items: start;
+    }
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
+    line-height: 1.1;
+  }
+
+  .footer-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 380px;
+    line-height: 1.6;
+  }
+
+  .footer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--accent-forest);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: var(--space-xs);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent-olive);
+  }
+
+  .footer-links-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 600px) {
+    .footer-links-group {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .col-title {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .footer-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer-nav a {
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-nav a:hover {
+    color: var(--accent-olive);
+  }
+
+  .instagram-link {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .insta-handle {
+    font-size: 0.78rem;
+    color: var(--accent-olive);
+    margin-top: 2px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border-subtle);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 600px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .back-to-top:hover {
+    color: var(--accent-olive);
+  }
+</style>
+

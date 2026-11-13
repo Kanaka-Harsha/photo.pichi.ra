@@ -1,0 +1,52 @@
+:root {
+  /* Earthy Natural Color Tokens */
+  --bg-primary: #F5F3EC;        /* Warm ivory */
+  --bg-secondary: #EAE6DA;      /* Soft natural beige */
+  --bg-card: #FFFFFF;           /* Pure white card surface with subtle opacity */
+  --bg-dark: #252921;           /* Deep earthy charcoal */
+  --bg-dark-surface: #1e221b;   /* Slightly deeper charcoal for cards in dark mode */
+
+  --text-primary: #292C25;      /* Deep charcoal */
+  --text-muted: #77796E;        /* Muted organic grey */
+  --text-light: #F5F3EC;        /* Warm ivory for dark backgrounds */
+  --text-light-muted: #A3A69A;  /* Soft grey for dark background captions */
+
+  --accent-olive: #727B57;      /* Olive green */
+  --accent-forest: #354536;     /* Forest green */
+  --accent-warm: #A08C6E;       /* Earthy warm ochre */
+
+  --border-subtle: #DAD8CD;     /* Muted natural grey hairline */
+  --border-dark: #353B2F;       /* Border on dark surfaces */
+
+  /* Typography Stack */
+  --font-serif: 'DM Serif Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6.5rem;
+
+  /* Container */
+  --container-max: 1360px;
+  --container-editorial: 960px;
+  --container-narrow: 720px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Radius (Deliberately restrained, no pill cards) */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+}
+

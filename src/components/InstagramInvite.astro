@@ -1,0 +1,144 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<section class="instagram-section" aria-labelledby="insta-heading">
+  <div class="container">
+    <div class="instagram-card">
+      <div class="instagram-glow" aria-hidden="true"></div>
+
+      <div class="instagram-inner">
+        <div class="instagram-icon-wrap" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </div>
+
+        <div class="instagram-text">
+          <span class="insta-eyebrow">Connect &amp; Follow</span>
+          <h2 id="insta-heading" class="insta-title">More moments, beyond the frame.</h2>
+          <p class="insta-sub">
+            Follow my continuous photography journey, behind-the-scenes field walks, and recent edits on Instagram.
+          </p>
+        </div>
+
+        <div class="instagram-action">
+          <a
+            href={siteConfig.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary insta-btn"
+          >
+            <span>{siteConfig.instagram.handle}</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .instagram-section {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-4xl);
+    background-color: var(--bg-primary);
+  }
+
+  .instagram-card {
+    position: relative;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    border-radius: var(--radius-md);
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem);
+    overflow: hidden;
+    border: 1px solid var(--border-dark);
+  }
+
+  .instagram-glow {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(114, 123, 87, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .instagram-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 860px) {
+    .instagram-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .instagram-icon-wrap {
+    color: var(--accent-olive);
+    background-color: rgba(114, 123, 87, 0.15);
+    padding: 1rem;
+    border-radius: 50%;
+    border: 1px solid rgba(114, 123, 87, 0.3);
+    flex-shrink: 0;
+  }
+
+  .instagram-text {
+    max-width: 580px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .insta-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-olive);
+  }
+
+  .insta-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    color: var(--text-light);
+    line-height: 1.15;
+  }
+
+  .insta-sub {
+    font-size: 0.95rem;
+    color: var(--text-light-muted);
+    line-height: 1.6;
+    margin-top: 0.25rem;
+  }
+
+  .instagram-action {
+    flex-shrink: 0;
+  }
+
+  .insta-btn {
+    background-color: var(--accent-olive);
+    border-color: var(--accent-olive);
+    color: var(--text-light);
+    padding: 0.95rem 1.85rem;
+    font-size: 0.92rem;
+  }
+
+  .insta-btn:hover {
+    background-color: var(--accent-forest);
+    border-color: var(--accent-forest);
+  }
+</style>
+

@@ -1,0 +1,73 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { siteConfig } from '../data/site';
+---
+
+<MainLayout title={`404 — Lost in the Wild | ${siteConfig.brandName}`}>
+  <div class="not-found-page">
+    <div class="container-editorial not-found-inner">
+      <span class="not-found-code">404</span>
+      <h1 class="not-found-title">Lost in the wild.</h1>
+      <p class="not-found-desc">
+        The trail you were following doesn't seem to lead anywhere, or perhaps this frame has been moved to another collection.
+      </p>
+
+      <div class="not-found-actions">
+        <a href="/" class="btn btn-primary">
+          <span>Return Home</span>
+        </a>
+        <a href="/gallery/" class="btn btn-secondary">
+          <span>Explore Gallery</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .not-found-page {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-primary);
+    text-align: center;
+  }
+
+  .not-found-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .not-found-code {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-olive);
+  }
+
+  .not-found-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--text-primary);
+  }
+
+  .not-found-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+</style>
+

@@ -1,0 +1,199 @@
+---
+import { Image } from 'astro:assets';
+import type { Photograph } from '../types/photograph';
+
+interface Props {
+  photo: Photograph;
+  priority?: boolean;
+  editorialLayout?: boolean;
+}
+
+const { photo, priority = false, editorialLayout = false } = Astro.props;
+
+// Calculate aspect-ratio class
+const orientationClass = `is-${photo.orientation || 'landscape'}`;
+---
+
+<figure
+  class={`photo-card ${orientationClass} ${editorialLayout ? 'editorial-item' : ''}`}
+  data-category={photo.category}
+>
+  <button
+    type="button"
+    class="photo-trigger"
+    aria-label={`Open photo in lightbox: ${photo.title}`}
+    data-lightbox-id={photo.id}
+    data-lightbox-src={photo.src.src}
+    data-lightbox-title={photo.title}
+    data-lightbox-category={photo.category}
+    data-lightbox-location={photo.location || ''}
+    data-lightbox-desc={photo.description || ''}
+    data-lightbox-alt={photo.alt}
+  >
+    <div class="photo-img-wrapper">
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        width={photo.orientation === 'portrait' ? 1200 : 1600}
+        height={photo.orientation === 'portrait' ? 1600 : 1066}
+        format="webp"
+        quality={88}
+        loading={priority ? 'eager' : 'lazy'}
+        class="card-img"
+      />
+
+      <!-- Subtle hover badge -->
+      <div class="photo-hover-veil" aria-hidden="true">
+        <span class="view-prompt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+          <span>View</span>
+        </span>
+      </div>
+    </div>
+  </button>
+
+  <figcaption class="photo-caption">
+    <div class="caption-header">
+      <span class="photo-category">{photo.category}</span>
+      {photo.location && <span class="photo-location">{photo.location}</span>}
+    </div>
+    <h3 class="photo-title">{photo.title}</h3>
+  </figcaption>
+</figure>
+
+<style>
+  .photo-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    background-color: transparent;
+    transition: transform var(--transition-normal);
+  }
+
+  .photo-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    outline: none;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-trigger:focus-visible {
+    outline: 2px solid var(--accent-olive);
+    outline-offset: 4px;
+  }
+
+  .photo-img-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    aspect-ratio: 4 / 3;
+  }
+
+  .is-portrait .photo-img-wrapper {
+    aspect-ratio: 3 / 4;
+  }
+
+  .is-square .photo-img-wrapper {
+    aspect-ratio: 1 / 1;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .photo-trigger:hover .card-img {
+    transform: scale(1.028);
+  }
+
+  /* Veil on hover */
+  .photo-hover-veil {
+    position: absolute;
+    inset: 0;
+    background: rgba(37, 41, 33, 0.28);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--transition-normal);
+  }
+
+  .photo-trigger:hover .photo-hover-veil {
+    opacity: 1;
+  }
+
+  .view-prompt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    background: rgba(25, 28, 23, 0.7);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    transform: translateY(4px);
+    transition: transform var(--transition-fast);
+  }
+
+  .photo-trigger:hover .view-prompt {
+    transform: translateY(0);
+  }
+
+  /* Caption */
+  .photo-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: var(--space-2xs);
+  }
+
+  .caption-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .photo-category {
+    color: var(--accent-olive);
+    font-weight: 500;
+  }
+
+  .photo-location {
+    color: var(--text-muted);
+  }
+
+  .photo-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.25;
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+</style>
+

@@ -1,0 +1,177 @@
+---
+import { Image } from 'astro:assets';
+import wildlife01 from '../assets/photographs/wildlife/wildlife-01.jpg';
+---
+
+<section class="behind-lens-section" aria-labelledby="behind-lens-heading">
+  <div class="container">
+    <div class="behind-lens-grid">
+      <!-- Portrait / Personal Frame visual -->
+      <div class="behind-visual">
+        <div class="visual-frame">
+          <Image
+            src={wildlife01}
+            alt="Photographic study in quiet morning light"
+            width={900}
+            height={1100}
+            format="webp"
+            quality={88}
+            loading="lazy"
+            class="behind-img"
+          />
+          <div class="visual-border" aria-hidden="true"></div>
+        </div>
+        <div class="visual-caption">
+          <span class="caption-label">Field Notes</span>
+          <p class="caption-text">"Patience taught me more about composition than any manual ever could."</p>
+        </div>
+      </div>
+
+      <!-- Story Text Content -->
+      <div class="behind-content">
+        <span class="section-tag">About the Journey</span>
+        <h2 id="behind-lens-heading" class="section-title">Behind the lens.</h2>
+
+        <div class="story-paragraphs">
+          <p class="lead-story">
+            Photography has become my way of slowing down, observing, and appreciating the world around me.
+          </p>
+          <p>
+            I am right at the beginning of this craft — roughly two months in. Rather than owning an expensive camera locker, I rent gear whenever I head out into the field, testing different bodies and lenses to see what lets me connect most closely with wildlife, birds, and open horizons.
+          </p>
+          <p>
+            Along the way, I'm discovering my voice: experimenting with post-processing in Lightroom, learning Photoshop to master natural color and subtle tonal contrast, and finding which natural habitats inspire me most.
+          </p>
+          <p class="text-muted">
+            Every photograph is part of a continuing process of learning, exploring, and discovering. No claims of mastery — just honest curiosity and deep respect for the outdoors.
+          </p>
+        </div>
+
+        <div class="behind-actions">
+          <a href="/about/" class="btn btn-secondary">
+            <span>Read full story &amp; philosophy</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .behind-lens-section {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
+    background-color: var(--bg-primary);
+  }
+
+  .behind-lens-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .behind-lens-grid {
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  /* Visual frame */
+  .behind-visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .visual-frame {
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+  }
+
+  .behind-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .visual-border {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(245, 243, 236, 0.45);
+    pointer-events: none;
+    border-radius: var(--radius-sm);
+  }
+
+  .visual-caption {
+    padding: var(--space-sm) var(--space-xs);
+    border-left: 2px solid var(--accent-olive);
+  }
+
+  .caption-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-forest);
+    display: block;
+  }
+
+  .caption-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Story Content */
+  .behind-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-olive);
+  }
+
+  .section-title {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .story-paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .lead-story {
+    font-size: 1.18rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+  }
+
+  .story-paragraphs p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .behind-actions {
+    margin-top: var(--space-sm);
+  }
+</style>
+

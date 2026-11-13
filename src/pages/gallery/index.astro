@@ -1,0 +1,142 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import GalleryFilter from '../../components/GalleryFilter.astro';
+import PhotographCard from '../../components/PhotographCard.astro';
+import { photographs } from '../../data/photographs';
+import { siteConfig } from '../../data/site';
+
+const sortedPhotos = [...photographs].sort((a, b) => a.order - b.order);
+---
+
+<MainLayout
+  title={`Complete Gallery | ${siteConfig.brandName}`}
+  description="Explore the full collection of nature, wildlife, bird, and landscape photographs by photo.pichi.ra."
+>
+  <div class="gallery-page">
+    <div class="container">
+      <!-- Gallery Header -->
+      <header class="gallery-header">
+        <span class="gallery-eyebrow">Visual Archive</span>
+        <h1 class="gallery-title">Complete Gallery</h1>
+        <p class="gallery-lead">
+          A collection of encounters, quiet outdoor hours, and natural discoveries captured across wildlife habitats, forests, and mountain valleys.
+        </p>
+      </header>
+
+      <!-- Category Filter Toolbar -->
+      <GalleryFilter activeCategory="all" />
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" id="gallery-grid">
+        {sortedPhotos.map((photo, index) => (
+          <div class="gallery-grid-item" data-category={photo.category}>
+            <PhotographCard photo={photo} priority={index < 4} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="gallery-empty-state" style="display: none;">
+        <div class="empty-box">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <h3>No photographs found</h3>
+          <p>There are currently no photographs filed under this category.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .gallery-page {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-4xl);
+    background-color: var(--bg-primary);
+  }
+
+  .gallery-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto var(--space-2xl) auto;
+  }
+
+  .gallery-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-olive);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .gallery-title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .gallery-lead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-top: var(--space-sm);
+    line-height: 1.65;
+  }
+
+  /* Responsive Gallery Grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 600px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+  }
+
+  .gallery-grid-item {
+    transition: opacity var(--transition-normal);
+  }
+
+  /* Empty State */
+  .empty-state {
+    padding: var(--space-4xl) 0;
+    text-align: center;
+  }
+
+  .empty-box {
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-muted);
+  }
+
+  .empty-icon {
+    color: var(--accent-olive);
+    margin-bottom: var(--space-xs);
+  }
+
+  .empty-box h3 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--text-primary);
+  }
+</style>
+

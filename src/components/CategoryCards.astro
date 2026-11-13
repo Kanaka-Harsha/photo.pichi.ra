@@ -1,0 +1,203 @@
+---
+import { Image } from 'astro:assets';
+import { siteConfig } from '../data/site';
+import { getCategoryCover } from '../data/photographs';
+---
+
+<section class="categories-section" aria-labelledby="categories-heading">
+  <div class="container">
+    <div class="categories-intro">
+      <span class="section-tag">Collections</span>
+      <h2 id="categories-heading" class="section-title">Domains of Nature</h2>
+      <p class="section-sub">
+        Dedicated studies into animal behaviors, bird flight, organic textures, and shifting landscapes.
+      </p>
+    </div>
+
+    <div class="category-cards-grid">
+      {siteConfig.categories.map((cat) => {
+        const cover = getCategoryCover(cat.slug);
+        return (
+          <article class="cat-card">
+            <a href={`/gallery/${cat.slug}`} class="cat-card-link" aria-label={`Explore ${cat.name} collection`}>
+              <div class="cat-img-box">
+                <Image
+                  src={cover.src}
+                  alt={cover.alt}
+                  width={900}
+                  height={600}
+                  format="webp"
+                  quality={85}
+                  loading="lazy"
+                  class="cat-img"
+                />
+                <div class="cat-img-scrim" aria-hidden="true"></div>
+                <div class="cat-pill">
+                  <span>Explore Collection</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </div>
+              </div>
+
+              <div class="cat-info">
+                <span class="cat-tagline">{cat.tagline}</span>
+                <h3 class="cat-title">{cat.name}</h3>
+                <p class="cat-desc">{cat.description}</p>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .categories-section {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .categories-intro {
+    max-width: 600px;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-forest);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-top: 0.45rem;
+    line-height: 1.6;
+  }
+
+  .category-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 640px) {
+    .category-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .category-cards-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+    }
+  }
+
+  .cat-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  }
+
+  .cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(41, 44, 37, 0.08);
+  }
+
+  .cat-card-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .cat-img-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+  }
+
+  .cat-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .cat-card:hover .cat-img {
+    transform: scale(1.05);
+  }
+
+  .cat-img-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(37, 41, 33, 0.6) 0%, transparent 60%);
+  }
+
+  .cat-pill {
+    position: absolute;
+    bottom: var(--space-sm);
+    right: var(--space-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    background-color: rgba(37, 41, 33, 0.75);
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(4px);
+  }
+
+  .cat-info {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1;
+  }
+
+  .cat-tagline {
+    font-size: 0.75rem;
+    color: var(--accent-olive);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .cat-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .cat-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-top: 0.25rem;
+  }
+</style>
+
