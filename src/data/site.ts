@@ -6,7 +6,7 @@ export interface NavItem {
 
 export const siteConfig = {
   title: 'photo.pichi.ra | My Photography Journal',
-  description: 'Hi, welcome to my photo journal! Photography has been my hobby for the past 1-2 years. Here are my favorite frames of nature, birds, sunrises, and creative experiments.',
+  description: 'Hi, welcome to my photo journal! Photography has been my hobby for the past 1-2 years. Here are my favorite frames of nature, wildlife, sunrises, and creative experiments.',
   brandName: 'photo.pichi.ra',
   author: 'photo.pichi',
   url: 'https://photo-pichi-ra.vercel.app',
@@ -37,14 +37,8 @@ export const siteConfig = {
     {
       slug: 'wildlife',
       name: 'Wildlife',
-      tagline: 'Animals in the wild',
-      description: 'Little moments with animals and nature, waiting patiently for them to feel comfortable.'
-    },
-    {
-      slug: 'birds',
-      name: 'Birds',
-      tagline: 'Feathers & quiet moments',
-      description: 'White cranes standing still in water, ducks swimming by, and birds resting on branches.'
+      tagline: 'Animals & birds in the wild',
+      description: 'Little moments with animals and birds — cranes, ducks, goats, and more — spotted while out on walks and trips.'
     },
     {
       slug: 'nature',
