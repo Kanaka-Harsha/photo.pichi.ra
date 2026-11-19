@@ -49,10 +49,8 @@ async function generate() {
       if (ratio > 1.15) orientation = 'landscape';
       else if (ratio < 0.85) orientation = 'portrait';
 
-      const isNM = file.startsWith('NM') || file.startsWith('NM-');
-      const isHero = file === 'Sunrise-Alleppy.jpg';
+      const isNM = file.startsWith('NM') || file.startsWith('NM_') || file.startsWith('NM-');
 
-      // Specific known mappings
       let title = '';
       let category = defaultCat;
       let description = '';
@@ -61,101 +59,101 @@ async function generate() {
       let instagramUrl = '';
 
       if (file === 'Sunrise-Alleppy.jpg') {
-        title = 'Golden Sunrise over Alleppey';
-        description = 'Yet another period of the golden hours. Morning light reflecting across the peaceful waters.';
+        title = 'Sunrise in Alleppey';
+        description = 'Woke up early to catch the morning sun coming over the backwaters. One of my favorite memories from Alleppey.';
         location = 'Alleppey Backwaters, Kerala';
         featured = true;
       } else if (file === 'waterfall-1.jpg') {
-        title = 'Happiness In Small Things';
-        description = 'The biggest happiness lies in the smallest things 🌊🪨🏔️. Rushing mountain waters cascading through natural rock.';
+        title = 'Happiness in Small Things';
+        description = 'Fresh mountain water rushing over rocks on a cool morning hike. Simple things bring the biggest smiles.';
         location = 'Mountain Cascades';
         category = 'landscapes';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DaxQAGrpRCS/';
       } else if (file === 'Beach-Landscape-1.jpg') {
         title = 'Every Splash Leaves Something';
-        description = 'Every splash leaves something behind 🌊🪨. Coastal tides meeting the shoreline during evening golden hour.';
-        location = 'Coastal Shore';
+        description = 'Watching evening tides roll into the shore right as the sun started setting.';
+        location = 'Coastal Beach';
         category = 'landscapes';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DazFXsop6S0/';
       } else if (file === 'munnar-Landscape-1.jpg') {
-        title = 'Closer To Peace — Munnar';
-        description = 'Away from chaos, closer to peace 🕊️ 🏔️ 🌫️. Misty green hills stretching across rolling tea plantations.';
+        title = 'Misty Morning in Munnar';
+        description = 'Away from all the city noise. Just cold morning breeze, mist, and green tea hills as far as you can see.';
         location = 'Munnar, Kerala';
         category = 'landscapes';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DfLshZmJYbd/';
       } else if (file === 'CCrane-1.jpg') {
-        title = 'White • The Colour Of Peace';
-        description = 'White • The Colour Of Peace🤍🌿. A solitary crane poised in quiet wetlands.';
+        title = 'White • The Colour of Peace';
+        description = 'Found this crane standing completely still in shallow wetland water, watching for fish.';
         location = 'Wetland Sanctuary';
         category = 'birds';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DfpjjiozHsg/';
       } else if (file === 'Duck1.jpg') {
-        title = 'Ready For A Swim';
-        description = 'Ready For A Swim 🦆 🌊... Calm ripples forming as water glides by.';
-        location = 'Lake Shore';
+        title = 'Ready for a Swim';
+        description = 'A duck gliding peacefully across the water early in the morning.';
+        location = 'Lakeside';
         category = 'wildlife';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DfhP3kqOcri/';
       } else if (file === 'Bird1.jpg') {
         title = 'Feel The Elegance';
-        description = 'Feel The Elegance... 🕊️ 🍃. Subtle grace caught in an intimate wildlife moment.';
+        description = 'Caught a quiet moment of this bird resting on a branch before flying away.';
         location = 'Forest Edge';
         category = 'birds';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DffW7gVztWB/';
       } else if (file === 'Goat-1.jpg') {
-        title = 'The Humans Of Mountains';
-        description = 'The Humans Of Mountains 🦌 🏔️. Resilient wildlife navigating steep rocky terrain.';
-        location = 'High Altitude Slopes';
+        title = 'The Humans of Mountains';
+        description = 'Saw this mountain goat walking along rocky steep slopes like it was everyday ground.';
+        location = 'High Slopes';
         category = 'wildlife';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DfCgigwuwDf/';
       } else if (file === 'POR-Mine-1.jpg') {
-        title = 'Behind the Lens — Self Portrait';
-        description = 'The person behind photo.pichi.ra. Exploring the outdoors, renting camera bodies, and finding quiet moments in nature.';
-        location = 'Field Studio';
+        title = 'Behind the Lens';
+        description = 'That is me out on a shoot with a rented camera body! Still learning and having fun with every trip.';
+        location = 'Field Shoot';
         category = 'portrait';
         featured = true;
       } else if (file === 'Somu-Portrait-1.jpg') {
         title = 'Portrait of Somu';
-        description = 'An authentic, character-rich portrait study illuminated by natural ambient light.';
+        description = 'A fun, natural portrait of Somu taken in soft afternoon light.';
         location = 'Outdoor Session';
         category = 'portrait';
         featured = true;
       } else if (isNM) {
         if (folder === 'Portrait') {
-          title = `Editorial Portrait Study ${file.includes('2') ? 'II' : 'I'}`;
-          description = 'Color grading and skin tone refinement practiced on professional RAW files.';
+          title = `Portrait Color Grade ${file.includes('2') ? 'II' : 'I'}`;
+          description = 'Practicing skin tones and natural contrast curves on free RAW practice files.';
           category = 'portrait';
         } else {
-          title = `Highland Vista Edit ${file.replace(/[^0-9]/g, '') || count}`;
-          description = 'Atmospheric grading, dynamic range handling, and tone curve practice.';
+          title = `Landscape Edit ${file.replace(/[^0-9]/g, '') || count}`;
+          description = 'Testing out dynamic range and color grading on high-grade practice RAW files.';
           category = 'landscapes';
         }
-        location = 'Practice RAW File';
+        location = 'RAW Practice File';
         featured = false;
       } else if (folder === 'Creative') {
         const titles = [
-          'Warmth of Ember', 'Shadow & Form', 'Golden Radiance', 'Nocturne Study',
-          'Intimate Focus', 'Texture & Tone', 'Abstract Foliage', 'Sunlight Diffusion',
-          'Soft Contours', 'Fading Dusk', 'Chasing Amber', 'Quiet Glow', 'Botanical Silhouette'
+          'Warmth of Fire', 'Light & Shadow', 'Golden Hour Glow', 'Night Mood',
+          'Soft Focus', 'Candle Flame', 'Foliage Shadows', 'Filtered Sunlight',
+          'Evening Warmth', 'Gentle Hues', 'Amber Light', 'Quiet Room Glow', 'Silhouette'
         ];
-        title = titles[(count - 1) % titles.length] || `Creative Study ${count}`;
-        description = 'Exploring color mood, contrast shapes, and digital darkroom techniques in Lightroom.';
+        title = titles[(count - 1) % titles.length] || `Creative Shot ${count}`;
+        description = 'Having fun experimenting with shadows, candles, and warm tones in Lightroom.';
         category = 'creative';
         featured = count <= 2;
       } else if (folder === 'nature') {
-        title = file.includes('1') ? 'Verdant Canopy' : `Nature Texture ${count}`;
-        description = 'Quiet organic textures and details that often go unnoticed on the forest floor.';
+        title = file.includes('1') ? 'Sunlit Leaves' : `Green Texture ${count}`;
+        description = 'Little details and green leaves you notice when you take your time walking outside.';
         category = 'nature';
         featured = count === 1;
       } else {
-        title = `Scenic Vista ${count}`;
-        description = 'Observing natural light, landscape lines, and changing outdoor conditions.';
+        title = `Outdoor View ${count}`;
+        description = 'A quiet outdoor view from one of my weekend photo walks.';
         category = defaultCat;
       }
 
@@ -164,7 +162,7 @@ async function generate() {
         title,
         category,
         srcVar: varName,
-        alt: `${title} - photography by photo.pichi.ra`,
+        alt: `${title} - photo by photo.pichi.ra`,
         description,
         location,
         date: '2026',
@@ -185,11 +183,11 @@ ${imports.join('\n')}
 
 export const heroPhotograph: Photograph = {
   id: 'hero-sunrise-alleppey',
-  title: 'Golden Sunrise over Alleppey',
+  title: 'Sunrise in Alleppey',
   category: 'landscapes',
   src: heroBg,
-  alt: 'Atmospheric sunrise with glowing golden light over Alleppey backwaters',
-  description: 'Yet another period of the golden hours. Morning light reflecting across the peaceful backwaters of Alleppey.',
+  alt: 'Golden sunrise over peaceful Alleppey backwaters',
+  description: 'Woke up early to catch the morning sun coming over the backwaters. One of my favorite memories from Alleppey.',
   location: 'Alleppey Backwaters, Kerala',
   date: '2026',
   order: 0,
@@ -199,12 +197,12 @@ export const heroPhotograph: Photograph = {
 
 export const photographerBioPhoto: Photograph = {
   id: 'bio-photo-pichi',
-  title: 'Behind the Lens — Self Portrait',
+  title: 'Behind the Lens',
   category: 'portrait',
   src: photographerPortrait,
   alt: 'The photographer behind photo.pichi.ra',
-  description: 'The person behind photo.pichi.ra. Exploring the outdoors, renting camera bodies, and finding quiet moments in nature.',
-  location: 'Field Studio',
+  description: 'That is me out on a shoot with a rented camera body! Still learning and having fun with every trip.',
+  location: 'Field Shoot',
   date: '2026',
   order: 0,
   featured: true,
@@ -233,12 +231,12 @@ ${photoEntries.map(p => `  {
 export function getFeaturedPhotographs(): Photograph[] {
   // Return a carefully ordered mix for the editorial featured showcase
   const preferredFeaturedIds = [
-    'photo-landscapes-16', // munnar-Landscape-1 (Wide Munnar hills)
-    'photo-landscapes-22', // waterfall-1 (Tall mountain waterfall)
+    'photo-landscapes-16', // munnar-Landscape-1 (Misty morning in Munnar)
+    'photo-landscapes-22', // waterfall-1 (Mountain waterfall)
     'photo-wildlife-25',   // CCrane-1 (White crane in wetlands)
-    'photo-wildlife-26',   // Duck1 (Wildlife duck in water)
-    'photo-landscapes-7',  // Beach-Landscape-1 (Coastal golden hour)
-    'photo-portrait-34',   // Somu-Portrait-1 (Character portrait)
+    'photo-wildlife-26',   // Duck1 (Duck gliding)
+    'photo-landscapes-7',  // Beach-Landscape-1 (Beach waves at sunset)
+    'photo-portrait-34',   // Somu-Portrait-1 (Portrait of Somu)
   ];
 
   const matched = preferredFeaturedIds

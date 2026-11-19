@@ -5,8 +5,8 @@ export interface NavItem {
 }
 
 export const siteConfig = {
-  title: 'photo.pichi.ra | Nature, Wildlife & Landscape Photography',
-  description: 'An ongoing journey exploring nature, wildlife, birds, landscapes, and creative darkroom edits through the lens of photo.pichi.ra. Finding beauty in the wild, one frame at a time.',
+  title: 'photo.pichi.ra | My Photography Journal',
+  description: 'Hi, welcome to my photo journal! Photography has been my hobby for the past 1-2 years. Here are my favorite frames of nature, birds, sunrises, and creative experiments.',
   brandName: 'photo.pichi.ra',
   author: 'photo.pichi',
   url: 'https://photo-pichi-ra.vercel.app',
@@ -16,10 +16,10 @@ export const siteConfig = {
     cta: 'Follow my journey on Instagram'
   },
   taglines: {
-    hero: 'Finding beauty in the wild.',
-    heroSub: 'Exploring the natural world, one frame at a time.',
-    editorialIntro: 'An ongoing journey through nature, wildlife, and the little moments that often go unnoticed.',
-    editorialSub: 'Photography has become my way of slowing down, observing, and discovering the outdoors. Every frame is a step in learning, exploring, and seeing the world with fresh eyes.'
+    hero: 'Finding peace behind the camera.',
+    heroSub: 'A personal collection of sunrises, quiet outdoors, and moments I love capturing.',
+    editorialIntro: "I've loved cameras since I was a kid. For the past 1–2 years, photography has been my favorite way to slow down.",
+    editorialSub: "I don't own a fancy camera yet — I rent gear when I travel, shoot whatever catches my eye, and spend hours having fun editing in Lightroom."
   },
   nav: [
     { label: 'Home', href: '/' },
@@ -31,38 +31,38 @@ export const siteConfig = {
     {
       slug: 'landscapes',
       name: 'Landscapes',
-      tagline: 'Atmosphere, light & vistas',
-      description: 'Sunrise horizons, rolling Munnar hills, Kerala backwaters, mist-shrouded valleys, and open skies.'
+      tagline: 'Sunrises, hills & water',
+      description: 'Morning light in Alleppey, misty hills in Munnar, beach waves, and open skies.'
     },
     {
       slug: 'wildlife',
       name: 'Wildlife',
-      tagline: 'Quiet encounters in the wild',
-      description: 'Documenting creatures in their natural habitats, capturing expressions, movement, and unseen moments.'
+      tagline: 'Animals in the wild',
+      description: 'Little moments with animals and nature, waiting patiently for them to feel comfortable.'
     },
     {
       slug: 'birds',
       name: 'Birds',
-      tagline: 'Feathered wonders & flight',
-      description: 'Patience rewarded: cranes in wetlands, morning ducks, and quiet perches in the wild.'
+      tagline: 'Feathers & quiet moments',
+      description: 'White cranes standing still in water, ducks swimming by, and birds resting on branches.'
     },
     {
       slug: 'nature',
       name: 'Nature',
-      tagline: 'Textures, foliage & flora',
-      description: 'Organic textures, sunlight filtering through foliage, vibrant blooms, and quiet forest details.'
+      tagline: 'Green leaves & sunlight',
+      description: 'Little things you spot when you look closely — sunlight through palm leaves, forest textures, and wildflowers.'
     },
     {
       slug: 'creative',
       name: 'Creative',
-      tagline: 'Atmosphere, light & color grading',
-      description: 'Experimental compositions, warm candlelit moments, mood studies, and digital darkroom exploration.'
+      tagline: 'Lights, shadows & mood',
+      description: 'Playing around with candlelight, warm fire tones, shadows, and color experiments in Lightroom.'
     },
     {
       slug: 'portrait',
       name: 'Portraits',
-      tagline: 'Character, tone & expression',
-      description: 'Environmental portraiture, expressive studies, and practice RAW workflows celebrating human presence.'
+      tagline: 'People & practice edits',
+      description: 'Portraits of friends, outdoor lighting tests, and edits practiced on free RAW files.'
     }
   ]
 } as const;
