@@ -322,6 +322,21 @@ export function getPhotographsByCategory(category: string): Photograph[] {
 }
 
 export function getCategoryCover(category: 'wildlife' | 'nature' | 'landscapes' | 'creative' | 'portrait'): Photograph {
+  // Preferred cover titles per category
+  const preferredCovers: Record<string, string> = {
+    portrait: 'Portrait of Somu',
+    landscapes: 'Misty Morning in Munnar',
+    wildlife: 'White \u2022 The Colour of Peace',
+    nature: 'First Bloom',
+    creative: 'Still Water, Moving Boat',
+  };
+
+  const preferred = preferredCovers[category];
+  if (preferred) {
+    const found = photographs.find(p => p.category === category && p.title === preferred);
+    if (found) return found;
+  }
+
   const matching = photographs.filter(p => p.category === category);
   return matching[0] || heroPhotograph;
 }
