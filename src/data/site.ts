@@ -5,8 +5,8 @@ export interface NavItem {
 }
 
 export const siteConfig = {
-  title: 'photo.pichi.ra | Nature & Wildlife Photography',
-  description: 'An ongoing journey exploring nature, wildlife, birds, and landscapes through the lens of photo.pichi.ra. Finding beauty in the wild, one frame at a time.',
+  title: 'photo.pichi.ra | Nature, Wildlife & Landscape Photography',
+  description: 'An ongoing journey exploring nature, wildlife, birds, landscapes, and creative darkroom edits through the lens of photo.pichi.ra. Finding beauty in the wild, one frame at a time.',
   brandName: 'photo.pichi.ra',
   author: 'photo.pichi',
   url: 'https://photo-pichi-ra.vercel.app',
@@ -29,28 +29,40 @@ export const siteConfig = {
   ] as NavItem[],
   categories: [
     {
+      slug: 'landscapes',
+      name: 'Landscapes',
+      tagline: 'Atmosphere, light & vistas',
+      description: 'Sunrise horizons, rolling Munnar hills, Kerala backwaters, mist-shrouded valleys, and open skies.'
+    },
+    {
       slug: 'wildlife',
       name: 'Wildlife',
       tagline: 'Quiet encounters in the wild',
-      description: 'Documenting creatures in their natural habitats, capturing expressions, movement, and unseen moments of animal life.'
+      description: 'Documenting creatures in their natural habitats, capturing expressions, movement, and unseen moments.'
     },
     {
       slug: 'birds',
       name: 'Birds',
       tagline: 'Feathered wonders & flight',
-      description: 'Patience rewarded: perched silhouettes, vibrant plumage, and fleeting moments in the canopy and shorelines.'
+      description: 'Patience rewarded: cranes in wetlands, morning ducks, and quiet perches in the wild.'
     },
     {
       slug: 'nature',
       name: 'Nature',
       tagline: 'Textures, foliage & flora',
-      description: 'The organic patterns, intricate forest floors, droplets, and quiet natural details that surround us.'
+      description: 'Organic textures, sunlight filtering through foliage, vibrant blooms, and quiet forest details.'
     },
     {
-      slug: 'landscapes',
-      name: 'Landscapes',
-      tagline: 'Atmosphere, light & vistas',
-      description: 'Open skies, rolling hills, calm horizons, and the changing temperaments of natural light across seasons.'
+      slug: 'creative',
+      name: 'Creative',
+      tagline: 'Atmosphere, light & color grading',
+      description: 'Experimental compositions, warm candlelit moments, mood studies, and digital darkroom exploration.'
+    },
+    {
+      slug: 'portrait',
+      name: 'Portraits',
+      tagline: 'Character, tone & expression',
+      description: 'Environmental portraiture, expressive studies, and practice RAW workflows celebrating human presence.'
     }
   ]
 } as const;

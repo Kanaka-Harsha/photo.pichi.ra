@@ -72,11 +72,47 @@
       <div class="caption-inner">
         <div class="caption-meta">
           <span class="caption-category" id="lightbox-category"></span>
-          <span class="caption-dot">•</span>
+          <span class="caption-dot" id="lightbox-dot">•</span>
           <span class="caption-location" id="lightbox-location"></span>
+          <span class="caption-practice-tag" id="lightbox-practice-tag" style="display: none;">RAW Practice Edit</span>
         </div>
         <h3 class="caption-title" id="lightbox-title"></h3>
         <p class="caption-desc" id="lightbox-desc"></p>
+
+        <!-- James Reader RAW Practice File Credits -->
+        <div class="lightbox-credits-box" id="lightbox-credits-box" style="display: none;">
+          <p class="credits-intro">Testing out my editing workflow on professional RAW practice files! 🎨✨</p>
+          <div class="credits-attribution">
+            <span class="credits-label">CREDITS: Free RAW practice files provided by James Reader</span>
+            <div class="credits-links">
+              <a href="https://www.instagram.com/james.reader" target="_blank" rel="noopener noreferrer" class="credit-link">
+                Instagram: @james.reader
+              </a>
+              <span class="credit-sep">•</span>
+              <a href="https://www.jamesreader.uk/raw-files" target="_blank" rel="noopener noreferrer" class="credit-link">
+                Website
+              </a>
+              <span class="credit-sep">•</span>
+              <a href="https://www.youtube.com/jamesreader" target="_blank" rel="noopener noreferrer" class="credit-link">
+                YouTube
+              </a>
+            </div>
+            <div class="credits-tags">
+              <span>#photoediting</span> <span>#colorgrade</span> <span>#postprocessing</span> <span>#lightroom</span> <span>#creativeediting</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Instagram Link -->
+        <div class="lightbox-insta-wrap" id="lightbox-insta-wrap" style="display: none;">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="lightbox-insta-link" id="lightbox-insta-link">
+            <span>View post on @photo.pichi.ra</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -106,9 +142,9 @@
   .lightbox-backdrop {
     position: absolute;
     inset: 0;
-    background-color: rgba(25, 28, 23, 0.96);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(22, 25, 20, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 
   /* Header Controls */
@@ -146,7 +182,7 @@
   }
 
   .lightbox-close:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.12);
     transform: scale(1.05);
   }
 
@@ -156,7 +192,7 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 1010;
-    background: rgba(37, 41, 33, 0.6);
+    background: rgba(37, 41, 33, 0.7);
     border: 1px solid var(--border-dark);
     color: var(--text-light);
     width: 3.25rem;
@@ -170,7 +206,7 @@
   }
 
   .lightbox-nav-btn:hover {
-    background: rgba(114, 123, 87, 0.8);
+    background: rgba(114, 123, 87, 0.85);
     border-color: var(--accent-olive);
     transform: translateY(-50%) scale(1.08);
   }
@@ -187,7 +223,7 @@
     .lightbox-nav-btn {
       width: 2.5rem;
       height: 2.5rem;
-      background: rgba(37, 41, 33, 0.8);
+      background: rgba(37, 41, 33, 0.85);
     }
   }
 
@@ -201,7 +237,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 4.5rem var(--gutter) 5.5rem var(--gutter);
+    padding: 4.5rem var(--gutter) 6.5rem var(--gutter);
   }
 
   .lightbox-img-wrapper {
@@ -210,19 +246,19 @@
     align-items: center;
     justify-content: center;
     max-width: 90vw;
-    max-height: 72vh;
+    max-height: 68vh;
     overflow: hidden;
   }
 
   .lightbox-img {
     max-width: 90vw;
-    max-height: 72vh;
+    max-height: 68vh;
     width: auto;
     height: auto;
     object-fit: contain;
     border-radius: var(--radius-sm);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    transition: opacity var(--transition-fast);
   }
 
   /* Caption */
@@ -233,12 +269,14 @@
     right: 0;
     padding: var(--space-md) var(--gutter);
     text-align: center;
-    background: linear-gradient(to top, rgba(25, 28, 23, 0.95), transparent);
+    background: linear-gradient(to top, rgba(20, 23, 18, 0.98) 0%, rgba(20, 23, 18, 0.9) 70%, transparent 100%);
     color: var(--text-light);
+    max-height: 32vh;
+    overflow-y: auto;
   }
 
   .caption-inner {
-    max-width: 700px;
+    max-width: 740px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -250,24 +288,117 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent-olive);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .caption-practice-tag {
+    background: rgba(226, 160, 63, 0.2);
+    color: #F0B35B;
+    border: 1px solid rgba(226, 160, 63, 0.4);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.65rem;
   }
 
   .caption-title {
     font-family: var(--font-serif);
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
     color: var(--text-light);
     margin: 0;
   }
 
   .caption-desc {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--text-light-muted);
-    line-height: 1.4;
-    max-width: 580px;
+    line-height: 1.45;
+    max-width: 620px;
+  }
+
+  /* Credits Box */
+  .lightbox-credits-box {
+    margin-top: 0.5rem;
+    background: rgba(37, 41, 33, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    max-width: 640px;
+  }
+
+  .credits-intro {
+    font-size: 0.82rem;
+    color: #F0B35B;
+    font-weight: 500;
+  }
+
+  .credits-attribution {
+    font-size: 0.78rem;
+    color: var(--text-light-muted);
+    margin-top: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .credits-label {
+    font-weight: 500;
+    color: var(--text-light);
+  }
+
+  .credits-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+
+  .credit-link {
+    color: var(--accent-olive);
+    text-decoration: underline;
+    font-size: 0.78rem;
+  }
+
+  .credit-link:hover {
+    color: var(--text-light);
+  }
+
+  .credit-sep {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .credits-tags {
+    font-size: 0.72rem;
+    color: rgba(163, 166, 154, 0.7);
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.2rem;
+  }
+
+  .lightbox-insta-wrap {
+    margin-top: 0.4rem;
+  }
+
+  .lightbox-insta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--accent-olive);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .lightbox-insta-link:hover {
+    color: var(--text-light);
   }
 
   .sr-only {
@@ -292,6 +423,9 @@
     alt: string;
     description?: string;
     location?: string;
+    isPractice?: boolean;
+    credits?: string;
+    instagramUrl?: string;
   }
 
   let items: LightboxItem[] = [];
@@ -313,10 +447,13 @@
     const descEl = document.getElementById('lightbox-desc');
     const categoryEl = document.getElementById('lightbox-category');
     const locationEl = document.getElementById('lightbox-location');
+    const practiceTag = document.getElementById('lightbox-practice-tag');
+    const creditsBox = document.getElementById('lightbox-credits-box');
+    const instaWrap = document.getElementById('lightbox-insta-wrap');
+    const instaLink = document.getElementById('lightbox-insta-link') as HTMLAnchorElement | null;
 
     if (!overlay || !img) return;
 
-    // Collect all lightbox triggers currently visible
     function refreshItems() {
       const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-lightbox-src]:not([data-lightbox-hidden="true"])'));
       items = triggers.map(el => ({
@@ -326,7 +463,10 @@
         src: el.dataset.lightboxSrc || '',
         alt: el.dataset.lightboxAlt || '',
         description: el.dataset.lightboxDesc || '',
-        location: el.dataset.lightboxLocation || ''
+        location: el.dataset.lightboxLocation || '',
+        isPractice: el.dataset.lightboxIsPractice === 'true',
+        credits: el.dataset.lightboxCredits || '',
+        instagramUrl: el.dataset.lightboxInstagram || ''
       }));
 
       if (totalCountEl) {
@@ -340,7 +480,7 @@
       const item = items[currentIndex];
 
       if (img) {
-        img.style.opacity = '0.4';
+        img.style.opacity = '0.3';
         img.src = item.src;
         img.alt = item.alt || item.title;
         img.onload = () => {
@@ -353,6 +493,23 @@
       if (descEl) descEl.textContent = item.description || '';
       if (categoryEl) categoryEl.textContent = item.category;
       if (locationEl) locationEl.textContent = item.location || '';
+
+      if (practiceTag) {
+        practiceTag.style.display = item.isPractice ? 'inline-block' : 'none';
+      }
+
+      if (creditsBox) {
+        creditsBox.style.display = item.isPractice ? 'block' : 'none';
+      }
+
+      if (instaWrap && instaLink) {
+        if (item.instagramUrl) {
+          instaWrap.style.display = 'block';
+          instaLink.href = item.instagramUrl;
+        } else {
+          instaWrap.style.display = 'none';
+        }
+      }
     }
 
     function openLightbox(idx: number) {
@@ -372,14 +529,12 @@
       if (img) img.src = '';
     }
 
-    // Attach listeners
     closeBtn?.addEventListener('click', closeLightbox);
     backdrop?.addEventListener('click', closeLightbox);
 
     prevBtn?.addEventListener('click', () => showItem(currentIndex - 1));
     nextBtn?.addEventListener('click', () => showItem(currentIndex + 1));
 
-    // Keyboard support
     window.addEventListener('keydown', (e) => {
       if (!overlay.classList.contains('is-active')) return;
       if (e.key === 'Escape') closeLightbox();
@@ -387,7 +542,6 @@
       if (e.key === 'ArrowRight') showItem(currentIndex + 1);
     });
 
-    // Mobile touch swipe handling
     overlay.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
@@ -401,14 +555,13 @@
       const diff = touchEndX - touchStartX;
       if (Math.abs(diff) > 45) {
         if (diff > 0) {
-          showItem(currentIndex - 1); // Swiped right -> prev
+          showItem(currentIndex - 1);
         } else {
-          showItem(currentIndex + 1); // Swiped left -> next
+          showItem(currentIndex + 1);
         }
       }
     }
 
-    // Bind triggers throughout document
     document.addEventListener('click', (e) => {
       const target = (e.target as HTMLElement).closest<HTMLElement>('[data-lightbox-src]');
       if (!target) return;
@@ -423,4 +576,3 @@
   initLightbox();
   document.addEventListener('astro:after-swap', initLightbox);
 </script>
-

@@ -7,26 +7,36 @@ import { siteConfig } from '../../data/site';
 import type { Category } from '../../types/photograph';
 
 export async function getStaticPaths() {
-  const categories: Array<{ slug: 'wildlife' | 'birds' | 'nature' | 'landscapes'; name: string; description: string }> = [
+  const categories: Array<{ slug: 'wildlife' | 'birds' | 'nature' | 'landscapes' | 'creative' | 'portrait'; name: string; description: string }> = [
+    {
+      slug: 'landscapes',
+      name: 'Landscape Photography',
+      description: 'Golden hour horizons, sunrise over Alleppey, rolling Munnar hills, and atmospheric valleys.'
+    },
     {
       slug: 'wildlife',
       name: 'Wildlife Photography',
-      description: 'Documenting creatures in their natural habitats, capturing expressions, movement, and unseen moments of animal life.'
+      description: 'Documenting creatures in their natural habitats, capturing expressions, movement, and unseen moments.'
     },
     {
       slug: 'birds',
       name: 'Bird Photography',
-      description: 'Patience rewarded: perched silhouettes, vibrant plumage, and fleeting moments in the canopy and shorelines.'
+      description: 'Patience rewarded: perched cranes in wetlands, morning ducks, and quiet feathered silhouettes.'
     },
     {
       slug: 'nature',
       name: 'Nature & Textures',
-      description: 'The organic patterns, intricate forest floors, droplets, and quiet natural details that surround us.'
+      description: 'The organic patterns, intricate forest foliage, macro droplets, and quiet natural textures.'
     },
     {
-      slug: 'landscapes',
-      name: 'Landscape Photography',
-      description: 'Open skies, rolling hills, calm horizons, and the changing temperaments of natural light across seasons.'
+      slug: 'creative',
+      name: 'Creative Photography',
+      description: 'Exploring light, shadows, candlelit compositions, and digital darkroom tone experiments.'
+    },
+    {
+      slug: 'portrait',
+      name: 'Portrait Photography',
+      description: 'Authentic people studies, natural light portraits, and color grading practice on professional RAW files.'
     }
   ];
 
@@ -61,8 +71,8 @@ const categoryPhotos = getPhotographsByCategory(category as Category);
       <!-- Category Filter Bar -->
       <GalleryFilter activeCategory={category} />
 
-      <!-- Gallery Grid -->
-      <div class="gallery-grid" id="gallery-grid">
+      <!-- Multi-Column Masonry Grid -->
+      <div class="gallery-masonry" id="gallery-grid">
         {categoryPhotos.map((photo, index) => (
           <div class="gallery-grid-item" data-category={photo.category}>
             <PhotographCard photo={photo} priority={index < 4} />
@@ -125,25 +135,29 @@ const categoryPhotos = getPhotographsByCategory(category as Category);
     line-height: 1.65;
   }
 
-  /* Grid */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+  /* Multi-Column Masonry Grid */
+  .gallery-masonry {
+    column-count: 1;
+    column-gap: var(--space-lg);
   }
 
-  @media (min-width: 600px) {
-    .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
+  @media (min-width: 640px) {
+    .gallery-masonry {
+      column-count: 2;
+      column-gap: var(--space-xl);
     }
   }
 
-  @media (min-width: 1024px) {
-    .gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-xl);
+  @media (min-width: 1080px) {
+    .gallery-masonry {
+      column-count: 3;
+      column-gap: var(--space-2xl);
     }
+  }
+
+  .gallery-grid-item {
+    break-inside: avoid;
+    margin-bottom: var(--space-xl);
   }
 
   .empty-state {
@@ -158,4 +172,3 @@ const categoryPhotos = getPhotographsByCategory(category as Category);
     color: var(--text-primary);
   }
 </style>
-

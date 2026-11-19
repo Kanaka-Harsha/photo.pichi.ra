@@ -10,7 +10,7 @@ const sortedPhotos = [...photographs].sort((a, b) => a.order - b.order);
 
 <MainLayout
   title={`Complete Gallery | ${siteConfig.brandName}`}
-  description="Explore the full collection of nature, wildlife, bird, and landscape photographs by photo.pichi.ra."
+  description="Explore the full collection of nature, wildlife, bird, landscape, and creative photographs by photo.pichi.ra."
 >
   <div class="gallery-page">
     <div class="container">
@@ -19,15 +19,15 @@ const sortedPhotos = [...photographs].sort((a, b) => a.order - b.order);
         <span class="gallery-eyebrow">Visual Archive</span>
         <h1 class="gallery-title">Complete Gallery</h1>
         <p class="gallery-lead">
-          A collection of encounters, quiet outdoor hours, and natural discoveries captured across wildlife habitats, forests, and mountain valleys.
+          A continuous journal of nature encounters, quiet outdoor hours, Alleppey sunrises, Kerala landscapes, and digital darkroom studies.
         </p>
       </header>
 
       <!-- Category Filter Toolbar -->
       <GalleryFilter activeCategory="all" />
 
-      <!-- Gallery Grid -->
-      <div class="gallery-grid" id="gallery-grid">
+      <!-- Multi-Column Masonry Grid -->
+      <div class="gallery-masonry" id="gallery-grid">
         {sortedPhotos.map((photo, index) => (
           <div class="gallery-grid-item" data-category={photo.category}>
             <PhotographCard photo={photo} priority={index < 4} />
@@ -87,28 +87,29 @@ const sortedPhotos = [...photographs].sort((a, b) => a.order - b.order);
     line-height: 1.65;
   }
 
-  /* Responsive Gallery Grid */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+  /* Multi-Column Masonry Grid for Zero-Crop Natural Orientations */
+  .gallery-masonry {
+    column-count: 1;
+    column-gap: var(--space-lg);
   }
 
-  @media (min-width: 600px) {
-    .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
+  @media (min-width: 640px) {
+    .gallery-masonry {
+      column-count: 2;
+      column-gap: var(--space-xl);
     }
   }
 
-  @media (min-width: 1024px) {
-    .gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-xl);
+  @media (min-width: 1080px) {
+    .gallery-masonry {
+      column-count: 3;
+      column-gap: var(--space-2xl);
     }
   }
 
   .gallery-grid-item {
+    break-inside: avoid;
+    margin-bottom: var(--space-xl);
     transition: opacity var(--transition-normal);
   }
 
@@ -139,4 +140,3 @@ const sortedPhotos = [...photographs].sort((a, b) => a.order - b.order);
     color: var(--text-primary);
   }
 </style>
-

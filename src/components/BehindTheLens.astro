@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import wildlife01 from '../assets/photographs/wildlife/wildlife-01.jpg';
+import { photographerBioPhoto } from '../data/photographs';
 ---
 
 <section class="behind-lens-section" aria-labelledby="behind-lens-heading">
@@ -10,10 +10,10 @@ import wildlife01 from '../assets/photographs/wildlife/wildlife-01.jpg';
       <div class="behind-visual">
         <div class="visual-frame">
           <Image
-            src={wildlife01}
-            alt="Photographic study in quiet morning light"
+            src={photographerBioPhoto.src}
+            alt={photographerBioPhoto.alt}
             width={900}
-            height={1100}
+            height={1140}
             format="webp"
             quality={88}
             loading="lazy"
@@ -40,7 +40,7 @@ import wildlife01 from '../assets/photographs/wildlife/wildlife-01.jpg';
             I am right at the beginning of this craft — roughly two months in. Rather than owning an expensive camera locker, I rent gear whenever I head out into the field, testing different bodies and lenses to see what lets me connect most closely with wildlife, birds, and open horizons.
           </p>
           <p>
-            Along the way, I'm discovering my voice: experimenting with post-processing in Lightroom, learning Photoshop to master natural color and subtle tonal contrast, and finding which natural habitats inspire me most.
+            Along the way, I'm developing my editing workflow: experimenting with color grading and tone curves in Adobe Lightroom, learning Photoshop techniques, and testing my processing on professional RAW practice files to master natural light and earthy color harmony.
           </p>
           <p class="text-muted">
             Every photograph is part of a continuing process of learning, exploring, and discovering. No claims of mastery — just honest curiosity and deep respect for the outdoors.
@@ -174,4 +174,3 @@ import wildlife01 from '../assets/photographs/wildlife/wildlife-01.jpg';
     margin-top: var(--space-sm);
   }
 </style>
-
