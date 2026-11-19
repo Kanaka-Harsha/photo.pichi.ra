@@ -290,7 +290,7 @@ ${photoEntries.map(p => `  {
 ];
 
 export function getFeaturedPhotographs(): Photograph[] {
-  // Pick the best featured photos by title for a stable cross-build selection
+  // Pick the best featured photos by title — never show NM/practice files on the home page
   const preferredTitles = [
     'Misty Morning in Munnar',
     'Happiness in Small Things',
@@ -306,8 +306,9 @@ export function getFeaturedPhotographs(): Photograph[] {
 
   if (matched.length >= 4) return matched;
 
+  // Fallback: featured, non-practice photos only
   return photographs
-    .filter(p => p.featured)
+    .filter(p => p.featured && !p.isPracticeFile)
     .sort((a, b) => a.order - b.order);
 }
 

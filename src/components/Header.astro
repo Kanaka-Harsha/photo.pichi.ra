@@ -230,20 +230,23 @@ const currentPath = Astro.url.pathname;
   }
 
   .hamburger-box {
-    width: 24px;
-    height: 18px;
+    width: 28px;
+    height: 20px;
     position: relative;
-    display: inline-block;
+    display: block;
   }
 
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
+    display: block;
     width: 24px;
     height: 2px;
-    background-color: var(--text-primary);
+    background-color: currentColor;
     position: absolute;
-    transition: transform 0.25s ease, background-color 0.25s ease;
+    left: 0;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
   }
 
   .hamburger-inner {
@@ -253,12 +256,13 @@ const currentPath = Astro.url.pathname;
 
   .hamburger-inner::before {
     content: '';
-    top: -7px;
+    top: -8px;
   }
 
   .hamburger-inner::after {
     content: '';
-    bottom: -7px;
+    top: 8px;
+    bottom: auto;
   }
 
   /* Open State */
@@ -267,11 +271,11 @@ const currentPath = Astro.url.pathname;
   }
 
   .mobile-toggle[aria-expanded="true"] .hamburger-inner::before {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
 
   .mobile-toggle[aria-expanded="true"] .hamburger-inner::after {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   /* Mobile Drawer */
