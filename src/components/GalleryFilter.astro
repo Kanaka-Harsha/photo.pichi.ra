@@ -39,8 +39,10 @@ const categories = [
     display: flex;
     justify-content: center;
     width: 100%;
+    max-width: 100%;
     margin-bottom: var(--space-2xl);
     padding: var(--space-xs) 0;
+    box-sizing: border-box;
   }
 
   .filter-track {
@@ -54,18 +56,22 @@ const categories = [
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-subtle);
     max-width: 100%;
+    box-sizing: border-box;
   }
 
   @media (max-width: 640px) {
     .gallery-filter-bar {
-      margin-left: calc(-1 * var(--gutter));
-      margin-right: calc(-1 * var(--gutter));
-      width: calc(100% + (2 * var(--gutter)));
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding: var(--space-xs) var(--gutter);
       justify-content: flex-start;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0.35rem 0.25rem;
+      margin-bottom: var(--space-xl);
+      width: 100%;
+      max-width: 100%;
     }
 
     .gallery-filter-bar::-webkit-scrollbar {
@@ -73,9 +79,18 @@ const categories = [
     }
 
     .filter-track {
+      display: inline-flex;
       flex-wrap: nowrap;
+      width: max-content;
+      max-width: none;
       padding: 0.35rem 0.5rem;
       border-radius: var(--radius-md);
+      gap: 0.35rem;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.8rem;
     }
   }
 
