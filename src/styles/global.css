@@ -22,10 +22,18 @@ html {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
   background-color: var(--bg-primary);
+  width: 100%;
+}
+
+html.menu-open,
+body.menu-open {
+  overflow: hidden !important;
+  touch-action: none;
 }
 
 /* Headings */

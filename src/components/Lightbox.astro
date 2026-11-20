@@ -224,6 +224,31 @@
       width: 2.5rem;
       height: 2.5rem;
       background: rgba(37, 41, 33, 0.85);
+      top: 40%;
+    }
+    .lightbox-prev {
+      left: 0.5rem;
+    }
+    .lightbox-next {
+      right: 0.5rem;
+    }
+    .lightbox-stage {
+      padding: 3.5rem var(--gutter) 6rem var(--gutter);
+    }
+    .lightbox-img-wrapper {
+      max-width: 95vw;
+      max-height: 58vh;
+      max-height: 58dvh;
+    }
+    .lightbox-img {
+      max-width: 95vw;
+      max-height: 58vh;
+      max-height: 58dvh;
+    }
+    .lightbox-caption {
+      max-height: 38vh;
+      max-height: 38dvh;
+      padding: var(--space-sm) var(--gutter);
     }
   }
 
@@ -453,6 +478,8 @@
     const instaLink = document.getElementById('lightbox-insta-link') as HTMLAnchorElement | null;
 
     if (!overlay || !img) return;
+    if (overlay.dataset.lightboxInit === 'true') return;
+    overlay.dataset.lightboxInit = 'true';
 
     function refreshItems() {
       const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-lightbox-src]:not([data-lightbox-hidden="true"])'));

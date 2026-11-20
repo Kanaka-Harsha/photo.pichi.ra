@@ -9,7 +9,7 @@ export const siteConfig = {
   description: 'Hi, welcome to my photo journal! Photography has been my hobby for the past 1-2 years. Here are my favorite frames of nature, wildlife, sunrises, and creative experiments.',
   brandName: 'photo.pichi.ra',
   author: 'photo.pichi',
-  url: 'https://photo-pichi-ra.vercel.app',
+  url: 'https://photopichira.vercel.app',
   instagram: {
     handle: '@photo.pichi.ra',
     url: 'https://www.instagram.com/photo.pichi.ra/',

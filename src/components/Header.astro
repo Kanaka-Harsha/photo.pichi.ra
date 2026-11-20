@@ -60,40 +60,41 @@ const currentPath = Astro.url.pathname;
       </span>
     </button>
   </div>
+</header>
 
-  <!-- Mobile Drawer Menu -->
-  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
-    <div class="drawer-content">
-      <nav class="mobile-nav" aria-label="Mobile navigation">
-        <ul class="mobile-nav-list">
-          {siteConfig.nav.map((item) => {
-            const isActive = item.href === '/' 
-              ? currentPath === '/' 
-              : currentPath.startsWith(item.href);
-            return (
-              <li class="mobile-nav-item">
-                <a
-                  href={item.href}
-                  class={`mobile-nav-link ${isActive ? 'is-active' : ''}`}
-                  target={item.external ? '_blank' : undefined}
-                  rel={item.external ? 'noopener noreferrer' : undefined}
-                >
-                  <span class="mobile-nav-text">{item.label}</span>
-                  {item.external && <span class="mobile-nav-tag">Instagram</span>}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+<!-- Mobile Drawer Backdrop & Menu (Outside <header> so backdrop-filter never traps it) -->
+<div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop" aria-hidden="true"></div>
+<div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+  <div class="drawer-content">
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <ul class="mobile-nav-list">
+        {siteConfig.nav.map((item) => {
+          const isActive = item.href === '/' 
+            ? currentPath === '/' 
+            : currentPath.startsWith(item.href);
+          return (
+            <li class="mobile-nav-item">
+              <a
+                href={item.href}
+                class={`mobile-nav-link ${isActive ? 'is-active' : ''}`}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+              >
+                <span class="mobile-nav-text">{item.label}</span>
+                {item.external && <span class="mobile-nav-tag">Instagram</span>}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
 
-      <div class="drawer-footer">
-        <p class="drawer-quote">"Exploring the natural world, one frame at a time."</p>
-        <p class="drawer-sub">@photo.pichi.ra</p>
-      </div>
+    <div class="drawer-footer">
+      <p class="drawer-quote">"Exploring the natural world, one frame at a time."</p>
+      <p class="drawer-sub">@photo.pichi.ra</p>
     </div>
   </div>
-</header>
+</div>
 
 <style>
   .site-header {
@@ -213,14 +214,16 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 3rem;
+    height: 3rem;
     padding: 0;
     background: transparent;
     border: none;
     cursor: pointer;
     color: var(--text-primary);
-    z-index: 110;
+    z-index: 1001;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   @media (min-width: 768px) {
@@ -230,23 +233,24 @@ const currentPath = Astro.url.pathname;
   }
 
   .hamburger-box {
-    width: 28px;
+    width: 26px;
     height: 20px;
     position: relative;
     display: block;
+    pointer-events: none;
   }
 
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
     display: block;
-    width: 24px;
+    width: 26px;
     height: 2px;
-    background-color: currentColor;
+    background-color: var(--text-primary);
     position: absolute;
     left: 0;
     border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, background-color 0.2s ease;
   }
 
   .hamburger-inner {
@@ -256,26 +260,49 @@ const currentPath = Astro.url.pathname;
 
   .hamburger-inner::before {
     content: '';
-    top: -8px;
+    top: -7px;
   }
 
   .hamburger-inner::after {
     content: '';
-    top: 8px;
+    top: 7px;
     bottom: auto;
   }
 
-  /* Open State */
+  /* Open State: morph smoothly into an X */
   .mobile-toggle[aria-expanded="true"] .hamburger-inner {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 
   .mobile-toggle[aria-expanded="true"] .hamburger-inner::before {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
+    background-color: var(--text-primary);
   }
 
   .mobile-toggle[aria-expanded="true"] .hamburger-inner::after {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
+    background-color: var(--text-primary);
+  }
+
+  /* Mobile Drawer Backdrop */
+  .mobile-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    top: 4.5rem;
+    background-color: rgba(20, 23, 18, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s;
+  }
+
+  .mobile-drawer-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   /* Mobile Drawer */
@@ -284,20 +311,25 @@ const currentPath = Astro.url.pathname;
     top: 4.5rem;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: calc(100vh - 4.5rem);
+    height: calc(100dvh - 4.5rem);
     background-color: var(--bg-primary);
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform var(--transition-normal), opacity var(--transition-normal);
-    z-index: 115;
+    z-index: 999;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     border-top: 1px solid var(--border-subtle);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s;
   }
 
   .mobile-drawer.is-open {
     transform: translateY(0);
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
 
@@ -306,14 +338,15 @@ const currentPath = Astro.url.pathname;
     flex-direction: column;
     justify-content: space-between;
     min-height: calc(100vh - 4.5rem);
-    padding: var(--space-2xl) var(--gutter);
+    min-height: calc(100dvh - 4.5rem);
+    padding: var(--space-xl) var(--gutter) var(--space-2xl) var(--gutter);
   }
 
   .mobile-nav-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--space-md);
   }
 
   .mobile-nav-link {
@@ -324,8 +357,9 @@ const currentPath = Astro.url.pathname;
     font-size: 1.85rem;
     color: var(--text-primary);
     text-decoration: none;
-    padding-bottom: var(--space-xs);
+    padding: var(--space-xs) 0;
     border-bottom: 1px solid var(--border-subtle);
+    touch-action: manipulation;
   }
 
   .mobile-nav-link.is-active {
@@ -345,8 +379,9 @@ const currentPath = Astro.url.pathname;
   }
 
   .drawer-footer {
-    padding-top: var(--space-2xl);
+    padding-top: var(--space-xl);
     border-top: 1px solid var(--border-subtle);
+    margin-top: var(--space-xl);
   }
 
   .drawer-quote {
@@ -366,38 +401,74 @@ const currentPath = Astro.url.pathname;
 
 <script>
   function setupMobileMenu() {
-    const toggle = document.getElementById('mobile-toggle');
-    const drawer = document.getElementById('mobile-drawer');
+    const toggle = document.getElementById('mobile-toggle') as HTMLButtonElement | null;
+    const drawer = document.getElementById('mobile-drawer') as HTMLElement | null;
+    const backdrop = document.getElementById('mobile-drawer-backdrop') as HTMLElement | null;
     if (!toggle || !drawer) return;
 
-    function toggleMenu() {
-      if (!toggle || !drawer) return;
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!isExpanded));
-      drawer.setAttribute('aria-hidden', String(isExpanded));
-      drawer.classList.toggle('is-open', !isExpanded);
-      document.body.style.overflow = !isExpanded ? 'hidden' : '';
+    if (toggle.dataset.menuInit === 'true') return;
+    toggle.dataset.menuInit = 'true';
+
+    const toggleBtn = toggle;
+    const drawerMenu = drawer;
+
+    function openMenu() {
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      drawerMenu.setAttribute('aria-hidden', 'false');
+      drawerMenu.classList.add('is-open');
+      backdrop?.classList.add('is-open');
+      document.documentElement.classList.add('menu-open');
+      document.body.classList.add('menu-open');
     }
 
-    toggle.addEventListener('click', toggleMenu);
+    function closeMenu() {
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      drawerMenu.setAttribute('aria-hidden', 'true');
+      drawerMenu.classList.remove('is-open');
+      backdrop?.classList.remove('is-open');
+      document.documentElement.classList.remove('menu-open');
+      document.body.classList.remove('menu-open');
+    }
+
+    function toggleMenu(e?: Event) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    toggleBtn.addEventListener('click', toggleMenu);
+    backdrop?.addEventListener('click', closeMenu);
 
     // Close on drawer link click
-    drawer.querySelectorAll('a').forEach(link => {
+    drawerMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        if (toggle && toggle.getAttribute('aria-expanded') === 'true') {
-          toggleMenu();
-        }
+        closeMenu();
       });
     });
 
     // Close on Escape
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && toggle && toggle.getAttribute('aria-expanded') === 'true') {
-        toggleMenu();
+      if (e.key === 'Escape' && toggleBtn.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
       }
     });
   }
 
-  setupMobileMenu();
-  document.addEventListener('astro:after-swap', setupMobileMenu);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileMenu);
+  } else {
+    setupMobileMenu();
+  }
+  document.addEventListener('astro:after-swap', () => {
+    const toggle = document.getElementById('mobile-toggle');
+    if (toggle) toggle.removeAttribute('data-menu-init');
+    setupMobileMenu();
+  });
 </script>

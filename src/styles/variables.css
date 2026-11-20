@@ -50,3 +50,11 @@
   --radius-lg: 8px;
 }
 
+@media (max-width: 640px) {
+  :root {
+    --space-3xl: 2.75rem;
+    --space-4xl: 3.75rem;
+    --gutter: 1.25rem;
+  }
+}
+

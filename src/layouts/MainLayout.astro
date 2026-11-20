@@ -21,7 +21,7 @@ const {
   transparentHeader = false
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://photo-pichi-ra.vercel.app';
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://photopichira.vercel.app';
 const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
 
 const jsonLd = {

@@ -56,6 +56,29 @@ const categories = [
     max-width: 100%;
   }
 
+  @media (max-width: 640px) {
+    .gallery-filter-bar {
+      margin-left: calc(-1 * var(--gutter));
+      margin-right: calc(-1 * var(--gutter));
+      width: calc(100% + (2 * var(--gutter)));
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: var(--space-xs) var(--gutter);
+      justify-content: flex-start;
+    }
+
+    .gallery-filter-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-track {
+      flex-wrap: nowrap;
+      padding: 0.35rem 0.5rem;
+      border-radius: var(--radius-md);
+    }
+  }
+
   .filter-btn {
     display: inline-flex;
     align-items: center;
@@ -72,6 +95,7 @@ const categories = [
     border-radius: var(--radius-sm);
     transition: all var(--transition-fast);
     white-space: nowrap;
+    touch-action: manipulation;
   }
 
   .filter-btn:hover {
@@ -99,6 +123,11 @@ const categories = [
 
 <script>
   function setupGalleryFilters() {
+    const bar = document.querySelector('.gallery-filter-bar');
+    if (!bar) return;
+    if (bar.getAttribute('data-filter-init') === 'true') return;
+    bar.setAttribute('data-filter-init', 'true');
+
     const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter-target]');
     const cards = document.querySelectorAll<HTMLElement>('.gallery-grid-item');
     const emptyState = document.getElementById('gallery-empty-state');
@@ -152,5 +181,9 @@ const categories = [
   }
 
   setupGalleryFilters();
-  document.addEventListener('astro:after-swap', setupGalleryFilters);
+  document.addEventListener('astro:after-swap', () => {
+    const bar = document.querySelector('.gallery-filter-bar');
+    if (bar) bar.removeAttribute('data-filter-init');
+    setupGalleryFilters();
+  });
 </script>
