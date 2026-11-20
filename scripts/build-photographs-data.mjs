@@ -91,6 +91,12 @@ async function generate() {
         category = 'wildlife';
         featured = true;
         instagramUrl = 'https://www.instagram.com/photo.pichi.ra/p/DfpjjiozHsg/';
+      } else if (file === 'crane-2-1.jpg') {
+        title = 'Stillness Among the Lilies';
+        description = 'A white crane standing completely motionless among blooming water hyacinths, mirrored perfectly on the water\'s surface.';
+        location = 'Alleppey Wetland, Kerala';
+        category = 'wildlife';
+        featured = true;
       } else if (file === 'Duck1.jpg') {
         title = 'Ready for a Swim';
         description = 'A duck gliding peacefully across the water early in the morning.';
@@ -137,6 +143,12 @@ async function generate() {
         category = 'portrait';
         featured = true;
         instagramUrl = '';
+      } else if (file === 'kerela-beach-1.jpg') {
+        title = 'A Walk by the Waves';
+        description = 'Two people sharing a quiet morning walk along the wide sandy shore with waves rolling in from the Arabian Sea.';
+        location = 'Coastal Beach, Kerala';
+        category = 'portrait';
+        featured = true;
       } else if (isNM) {
         if (folder === 'Portrait') {
           title = `Portrait Color Grade ${file.includes('2') ? 'II' : 'I'}`;
@@ -171,29 +183,35 @@ async function generate() {
           'bfc57b90-a225-4748-bb25-d1220aa392cc-copied-media_2.jpg': { t: 'Filtered Sunlight',    d: 'Light coming through leaves or a window — always looks so good with a soft edit on it.' },
           'c0dc0cdc-7612-4a95-a7c8-c3b6e2422941-copied-media_2.jpg': { t: 'Quiet Room Glow',      d: 'A still indoor frame with a warm glow. Sometimes the best shots happen right at home.' },
           'd03b273e-1129-4af7-a833-4d80910b7715-copied-media_2.jpg': { t: 'Silhouette',           d: 'Bold shape against a bright background. I always find silhouette edits satisfying to work on.' },
+          'mirror-1.jpg':     { t: 'Reflections in the Rain', d: 'Raindrops sliding down the window and mirror during a quiet night drive. I love how city lights catch the wet glass.', l: 'Night Drive' },
+          'restaurant-1.jpg': { t: 'Neon Glow in the Rain',   d: 'Misty night in the hills. The vibrant restaurant signs glowing through a raindrop-streaked car windshield.', l: 'Misty Highway' },
         };
         const cm = creativeMap[file];
         title = cm ? cm.t : `Creative Shot ${count}`;
         description = cm ? cm.d : 'Having fun experimenting with shadows, candles, and warm tones in Lightroom.';
+        if (cm && cm.l) location = cm.l;
         category = 'creative';
         featured = count <= 2;
       } else if (folder === 'nature') {
         const natureMap = {
-          'flower-1-1.jpg': { t: 'First Bloom',        d: 'Found this flower while walking through a garden early morning. Something about the light hitting it made me stop.' },
-          'flower-2-1.jpg': { t: 'Quiet Petals',       d: 'I keep coming back to flowers because they just stand still for you. No patience required.' },
-          'flower-3-1.jpg': { t: 'Soft and Still',     d: 'Took this during a slow walk. I love how flowers look with a slightly soft background.' },
-          'flower-4-1.jpg': { t: 'Full Bloom',         d: 'Fully opened flower in bright light. Shot from a close angle and I think it really shows the detail.' },
-          'flower-5-1.jpg': { t: 'Morning Color',      d: 'Early morning light on a flower — this is the kind of shot that makes waking up early worth it.' },
-          'flower-6-1.jpg': { t: 'Petal Close-Up',     d: 'Got really close on this one. Macro-style without a macro lens — just patience and a steady hand.' },
-          'flower-7-1.jpg': { t: 'Garden Find',        d: 'Just spotted this in someone\'s garden while passing by. Asked if I could click and they said yes!' },
-          'flower-8-1.jpg': { t: 'Last Light Bloom',   d: 'Caught this one in the last bit of afternoon sun before it faded. Colors came out really rich.' },
-          'Img20JPG.jpg':   { t: 'Green and Quiet',    d: 'Green textures and soft light from a walk I took on a lazy Sunday afternoon.' },
-          'Img21JPG.jpg':   { t: 'Forest Layers',      d: 'Looking up through the trees. The layers of green and light is something I never get tired of.' },
-          'Nat-1-1.jpg':    { t: 'Nature Close',       d: 'A close-up shot from a nature trail. When you slow down and look properly, there is so much detail around you.' },
+          'flower-1-1.jpg':  { t: 'First Bloom',        d: 'Found this flower while walking through a garden early morning. Something about the light hitting it made me stop.' },
+          'Flower-10-1.jpg': { t: 'Torch Ginger in Bloom',        d: 'Vibrant red and pink Torch Ginger flowers spotted in the morning mist, glistening with fresh raindrops.', l: 'Spice Garden, Kerala' },
+          'flower-2-1.jpg':  { t: 'Quiet Petals',       d: 'I keep coming back to flowers because they just stand still for you. No patience required.' },
+          'flower-3-1.jpg':  { t: 'Soft and Still',     d: 'Took this during a slow walk. I love how flowers look with a slightly soft background.' },
+          'flower-4-1.jpg':  { t: 'Full Bloom',         d: 'Fully opened flower in bright light. Shot from a close angle and I think it really shows the detail.' },
+          'flower-5-1.jpg':  { t: 'Morning Color',      d: 'Early morning light on a flower — this is the kind of shot that makes waking up early worth it.' },
+          'flower-6-1.jpg':  { t: 'Petal Close-Up',     d: 'Got really close on this one. Macro-style without a macro lens — just patience and a steady hand.' },
+          'flower-7-1.jpg':  { t: 'Garden Find',        d: 'Just spotted this in someone\'s garden while passing by. Asked if I could click and they said yes!' },
+          'flower-8-1.jpg':  { t: 'Last Light Bloom',   d: 'Caught this one in the last bit of afternoon sun before it faded. Colors came out really rich.' },
+          'Group-1.jpg':      { t: 'Walk Through the Morning Mist', d: 'Walking down a cool forest trail wrapped in morning mountain mist, listening to birds and the quiet of the hills.', l: 'Munnar Hills, Kerala' },
+          'Img20JPG.jpg':    { t: 'Green and Quiet',    d: 'Green textures and soft light from a walk I took on a lazy Sunday afternoon.' },
+          'Img21JPG.jpg':    { t: 'Forest Layers',      d: 'Looking up through the trees. The layers of green and light is something I never get tired of.' },
+          'Nat-1-1.jpg':     { t: 'Nature Close',       d: 'A close-up shot from a nature trail. When you slow down and look properly, there is so much detail around you.' },
         };
         const nm = natureMap[file];
         title = nm ? nm.t : `Nature Frame ${count}`;
         description = nm ? nm.d : 'Little details and green leaves you notice when you take your time walking outside.';
+        if (nm && nm.l) location = nm.l;
         category = 'nature';
         featured = count <= 3;
       } else if (folder === 'landscapes') {
@@ -201,15 +219,21 @@ async function generate() {
           '1000260705_1_.jpeg':          { t: 'Open Skies',          d: 'A wide open frame from a morning drive. The sky was doing something nice and I just stopped to click.' },
           '552d7b52-7458-4b3a-81c1-3e9f80d95d90-copied-media_2.jpg': { t: 'Quiet Roads',          d: 'Empty road, cool breeze. Some of my best clicks happen when I am just wandering without a plan.' },
           '6b4cc5c9-990a-442a-a269-820d298f02b4-copied-media_2.jpg': { t: 'Evening by the Water', d: 'Sat by the water as the light faded. These slow evening moments are my favorite time to shoot.' },
+          'backwaters-1.jpg':            { t: 'Echoes of the Backwaters',   d: 'Gliding through the peaceful backwater canals under deep blue skies and towering summer clouds.', l: 'Alleppey Backwaters, Kerala' },
           'bb187f49-5454-468b-8813-6e566b2c4ea6-copied-media_2.jpg': { t: 'Wide Open',             d: 'Big sky, big mood. I love how landscape shots make everything feel peaceful.' },
           'dad45165-4c57-4457-b21b-e15378cbba63-copied-media_2.jpg': { t: 'Horizon Line',          d: 'Standing at the edge and looking out. One of those shots that just felt right in the moment.' },
           'dda6afbc-5822-485c-87ee-f9d3b7eb0f57-copied-media_2.jpg': { t: 'Last Light',            d: 'Right before the sun fully set. That last bit of warm light is something I always chase.' },
+          'House-1.jpg':                 { t: 'Life by the Water',          d: 'A traditional home nestled right on the edge of the backwaters, surrounded by coconut palms and quiet morning ripples.', l: 'Alleppey, Kerala' },
           'image_23_.jpeg':              { t: 'Morning Stretch',     d: 'Caught this on the way to somewhere else. Sometimes you have to stop the car and just click.' },
           'Landscape-1.jpg':             { t: 'Simple Landscape',    d: 'Nothing fancy — just a quiet landscape that I liked the feel of when I was out that day.' },
+          'LS-5-1.jpg':                  { t: 'Open Skies over Alleppey',   d: 'Vast open waterways lined with water hyacinths, watching thunderclouds slowly build over the afternoon horizon.', l: 'Alleppey Backwaters, Kerala' },
+          'LS-6-1.jpg':                  { t: 'Monsoon Horizon',            d: 'A panoramic view across the water hyacinths and palm trees as monsoon clouds roll across the Kerala sky.', l: 'Alleppey Backwaters, Kerala' },
+          'sunrise-ktdc-1.jpg':          { t: 'Morning Calm at KTDC',        d: 'A wooden swing hanging beneath the morning canopy, looking out at the peaceful water as the sun begins to break.', l: 'KTDC Water Resort, Kerala' },
         };
         const lm = landscapeMap[file];
         title = lm ? lm.t : `Landscape View ${count}`;
         description = lm ? lm.d : 'A quiet outdoor view from one of my weekend photo walks.';
+        if (lm && lm.l) location = lm.l;
         category = 'landscapes';
         featured = false;
       } else {
